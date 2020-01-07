@@ -18,6 +18,9 @@ classdef FluorescenceViewer < handle
         function app = FluorescenceViewer
             CurrentPath = fileparts(mfilename('fullpath'));
             app.Main = [CurrentPath filesep 'Spectra Raw Data'];
+            if ~isfolder(app.Main)
+                app.Main = uigetdir(pwd, 'Select path to fluoresence data');
+            end
             addpath(CurrentPath);
             app.FNMS = dir('*.csv*');
             app.FNMS = struct2table(app.FNMS);
